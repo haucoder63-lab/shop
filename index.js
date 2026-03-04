@@ -6,6 +6,7 @@ const categoryRouter = require('./router/categoryRouter');
 const productRouter = require('./router/productRouter');
 const userRouter = require('./router/userRouter');
 const orderRouter = require('./router/OrderRouter');
+const orderItemRouter = require('./router/OrderItemRouter');
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(categoryRouter);
 app.use(productRouter);
 app.use(userRouter);
 app.use(orderRouter);
+app.use(orderItemRouter);
 
 app.locals.db = pool;
 
