@@ -6,7 +6,7 @@ const getAllCarts = async() => {
 
 const getCartById = async(id) => {
     const [rows] = await connection.query('SELECT * FROM `cart` WHERE id = ?', [id]);
-    return rows(0);
+    return rows[0];
 }
 
 const createdCart = async(user_id, product_id, quantity) => {
