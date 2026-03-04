@@ -7,7 +7,7 @@ const getAllUsers = async() => {
 
 const getUserById = async(id) => {
     const [rows] = await connection.query('SELECT * FROM `users` WHERE id = ?', [id]);
-    return rows(0);
+    return [rows[0]];
 }
 
 const createUser = async(email, password, role) => {

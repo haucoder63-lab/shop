@@ -4,12 +4,14 @@ const pool = require('./lib/dbConnect');
 const bannerRouter = require('./router/bannerRouter');
 const categoryRouter = require('./router/categoryRouter');
 const productRouter = require('./router/productRouter');
+const userRouter = require('./router/userRouter');
 
 const app = express();
 app.use(express.json());
 app.use(bannerRouter);
 app.use(categoryRouter);
 app.use(productRouter);
+app.use(userRouter);
 
 app.locals.db = pool;
 
