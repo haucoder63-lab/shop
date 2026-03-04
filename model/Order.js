@@ -7,27 +7,21 @@ const getAllOrders = async() => {
 
 const getOrderById = async(id) => {
     const [rows] = await connection.query('SELECT * FROM `orders` WHERE id = ?', [id]);
-    return rows(0);
+    return [rows[0]];
 }
 
-const createOrder = async(code, status, user_id, now) => {
-    const now = new Date();
-    for (let i = 0; i <= 10; i++) {
-        const key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        code += key.charAt(Math.floor(Math.random() * key.length, 10));
+const createOrder = async(status, user_id) => {
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+        const key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+        code += key.charAt(Math.floor(Math.random() * key.length));
     }
-
-    const [result] = await connection.query('INSERT INTO `orders`(code, status, user_id, now) VALUES(?,?,?,?', [code, status, user_id, now]);
+    const [result] = await connection.query('INSERT INTO `orders`(code, status, user_id) VALUES(?,?,?)', [code, status, user_id]);
     return result;
 }
 
-const updateOrder = async(id, code, status, user_id, now) => {
-    const now = new Date();
-    for (let i = 0; i <= 10; i++) {
-        const key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        code += key.charAt(Math.floor(Math.random() * key.length, 10));
-    }
-    const [result] = await connection.query('UPDATE `orders` SET code = ?, status = ?, user_id = ?, now = ? WHERE id = ?', [code, status, user_id, now, id]);
+const updateOrder = async(id, status, user_id) => {
+    const [result] = await connection.query('UPDATE `orders` SET status = ?, user_id = ? WHERE id = ?', [status, user_id, id]);
     return result;
 }
 

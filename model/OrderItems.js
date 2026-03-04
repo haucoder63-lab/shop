@@ -7,7 +7,7 @@ const getAllOrderItems = async() => {
 
 const getOrderItemById = async(id) => {
     const [rows] = await connection.query('SELECT * FROM `order_items` WHERE id = ?', [id]);
-    return rows(0);
+    return [rows[0]];
 }
 
 const createOrderItem = async(quantity, price, order_id, product_id) => {
